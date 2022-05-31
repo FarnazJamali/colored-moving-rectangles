@@ -1,18 +1,20 @@
 //* factory function
 
-function creatRectangle(x, y, r, g, b) {
+function creatRectangle(x, y, width, height, r, g, b) {
     return {
         x,
         y,
+        width,
+        height,
         r,
         g,
         b,
         produce() {
             let rect1 = document.createElement('div');
-            rect1.style.width = this.x / 5 + 'px';
-            rect1.style.height = this.y / 6 + 'px';
-            rect1.style.top = this.x + 100 + 'px';
-            rect1.style.left = this.y + 100 + 'px';
+            rect1.style.width = this.width + 'px';
+            rect1.style.height = this.height + 'px';
+            rect1.style.top = this.x + 'px';
+            rect1.style.left = this.y + 'px';
             rect1.style.position = 'absolute';
             rect1.style.margin = 20 + 'px';
             rect1.style.display = 'inline-block';
@@ -29,10 +31,12 @@ for (let i = 0; i < 50; i++) {
     let g = Math.round((Math.random()) * 255);
     let b = Math.round((Math.random()) * 255);
 
-    let x = Math.round((Math.random()) * (window.innerWidth - 50));
-    let y = Math.round((Math.random()) * (window.innerHeight - 50)) + 60;
+    let x = Math.round((Math.random()) * (window.innerWidth - 1000));
+    let y = Math.round((Math.random()) * (window.innerHeight * 2));
+    let w = Math.ceil((Math.random()) * 50) + 50;
+    let h = Math.floor((Math.random()) * 50) + 50;
 
-    creatRectangle(x, y, r, g, b).produce();
+    creatRectangle(x, y, w, h, r, g, b).produce();
 }
 
 //* add an event listener
@@ -43,7 +47,7 @@ for (const rect1 of move) {
 
 function moveUp(event) {
     let anotherX = Math.floor(Math.random() * (window.innerWidth / 1.5));
-    let anotherY = Math.floor(Math.random() * (window.innerHeight / 1.5));
+    let anotherY = Math.floor(Math.random() * (window.innerHeight * 2));
     let element = event.target;
     element.style.top = anotherX + 'px';
     element.style.left = anotherY + 'px';
